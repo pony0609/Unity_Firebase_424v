@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.InputSystem;
 
 public class EquipSystem : MonoBehaviour {
     [SerializeField] Transform weaponHolder;//手持時,武器應該在的地方(手)
@@ -10,10 +12,12 @@ public class EquipSystem : MonoBehaviour {
     GameObject currentWeaponInHand;//代表手上那把
     GameObject currentWeaponInSheath;//代表腰上那把
     // Start is called before the first frame update
-    void Start() {
-        if (weapon == null || weaponSheath == null) {//初始化檢查
+    IEnumerator Start() {
+        yield return StartCoroutine(FirestoreManager.Instance.DownloadPlayerData());
+        int weaponValue = PlayerPrefs.GetInt("Weapon",0);
+        if (weapon == null || weaponSheath == null || weaponValue !=1) {//初始化檢查
             Debug.LogError("Weapon or WeaponSheath is not assigned.");
-            return;
+            yield break;
         }
         //進場先用Instantiate生成一把weapon在weaponSheath的transform上
         currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);

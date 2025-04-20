@@ -11,13 +11,29 @@ public class EquipSystem : MonoBehaviour {
 
     GameObject currentWeaponInHand;//代表手上那把
     GameObject currentWeaponInSheath;//代表腰上那把
-    // Start is called before the first frame update
-    IEnumerator Start() {
-        yield return StartCoroutine(FirestoreManager.Instance.DownloadPlayerData());
-        int weaponValue = PlayerPrefs.GetInt("Weapon",0);
-        if (weapon == null || weaponSheath == null || weaponValue !=1) {//初始化檢查
+                                     // Start is called before the first frame update
+    /* IEnumerator Start() {
+         yield return StartCoroutine(FirestoreManager.Instance.DownloadPlayerData());
+         int weaponValue = PlayerPrefs.GetInt("Weapon",0);
+         if (weapon == null || weaponSheath == null || weaponValue !=1) {//初始化檢查
+             Debug.LogError("Weapon or WeaponSheath is not assigned.");
+             yield break;
+         }
+         //進場先用Instantiate生成一把weapon在weaponSheath的transform上
+         currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);
+         if (currentWeaponInSheath != null) {//狀態檢查
+             Debug.Log("Weapon instantiated in sheath.");
+         } else {
+             Debug.LogError("Failed to instantiate weapon in sheath.");
+         }
+     }*/
+
+    // Update is called once per frame
+    void Start() {
+        int weaponValue = PlayerPrefs.GetInt("Weapon", 0);
+        if (weapon == null || weaponSheath == null) {//初始化檢查
             Debug.LogError("Weapon or WeaponSheath is not assigned.");
-            yield break;
+            return;
         }
         //進場先用Instantiate生成一把weapon在weaponSheath的transform上
         currentWeaponInSheath = Instantiate(weapon, weaponSheath.transform);
@@ -27,8 +43,6 @@ public class EquipSystem : MonoBehaviour {
             Debug.LogError("Failed to instantiate weapon in sheath.");
         }
     }
-
-    // Update is called once per frame
     void Update() {
 
     }

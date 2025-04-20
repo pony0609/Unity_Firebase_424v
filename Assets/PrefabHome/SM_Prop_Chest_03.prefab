@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 367609f89e004d1429589e0ec1c61b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestLid: {fileID: 0}
+  chestLid: {fileID: 461604}
   ChestVFX:
   - {fileID: 143964, guid: 09d9de58ef3bf5444ac94afa0e6013cb, type: 3}
   - {fileID: 118250, guid: a79f8048fa75d6c449d730e96bb836fa, type: 3}
